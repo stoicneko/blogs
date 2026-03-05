@@ -35,7 +35,7 @@ export default defineConfig({
 
   // [Adapter]
   // https://docs.astro.build/en/guides/deploy/
-  adapter: cloudflare(),
+  adapter: cloudflare({ imageService: 'compile' }),
   output: 'server',
   // Local (standalone)
   // adapter: node({ mode: 'standalone' }),
