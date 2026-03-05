@@ -25,7 +25,7 @@ import config from './src/site.config.ts'
 // https://astro.build/config
 export default defineConfig({
   // [Basic]
-  site: 'https://blogs.pages.dev',
+  site: 'https://astro-pure.js.org',
   // Deploy to a sub path
   // https://astro-pure.js.org/docs/setup/deployment#platform-with-base-path
   // base: '/astro-pure/',
@@ -43,7 +43,10 @@ export default defineConfig({
 
   // [Assets]
   image: {
-    responsiveStyles: true
+    responsiveStyles: true,
+    service: {
+      entrypoint: 'astro/assets/services/sharp'
+    }
   },
 
   // [Markdown]
