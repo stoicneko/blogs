@@ -147,7 +147,7 @@ kind load docker-image nginx:latest
 ctr: content digest sha256:...: not found
 ```
 
-这是 Docker Desktop 启用 **containerd image store** 后的已知兼容性问题，`kind load` 和 `docker save` 都会触发。修好代理让 Kind 直接拉镜像，反而是最干净的方案。
+这其实不是 containerd image store 的问题，而是 Docker 本地保留了多平台 manifest list，但只有当前平台的 layers，`kind load` 内部的 `ctr --all-platforms` 找不到其他平台的 content digest 就报错了。详细分析和解决方案见 [kind load docker-image 多平台镜像导入失败](/blog/kind-load-docker-image-multiplatform-fix)。
 
 ## 总结
 
