@@ -1,5 +1,5 @@
 ---
-import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
+import { Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
@@ -8,68 +8,28 @@ const headings = [
   { depth: 2, slug: 'hobbies', text: 'Hobbies' },
   { depth: 2, slug: 'tools', text: 'Tools' },
   { depth: 2, slug: 'social-networks', text: 'Social Networks' },
-  { depth: 2, slug: 'gossips', text: 'Gossips' },
   { depth: 2, slug: 'about-blog', text: 'About Blog' }
 ]
 ---
 
 <PageLayout title='About' {headings} comment>
-  <p>Developer / Designer</p>
+  {/* TODO: 在这里写你的自我介绍 */}
+  <p>这里写一句话介绍你自己。</p>
   <p>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
-    possit voluptatum.
+    Motto: Stay hungry, Stay foolish. <Spoiler>这里可以藏一句悄悄话。</Spoiler>
   </p>
-  <p>
-    Motto: Stay hungry, Stay foolish. <Spoiler>这里可以夹私货，比如为什么要演奏春日影！</Spoiler>
-  </p>
-  <Button title='Sponsor Me' class='w-fit' href='/projects#sponsorship' variant='ahead' />
 
-  {/* general-talk */}
+  {/* hobbies */}
   <h2 id='hobbies'>Hobbies</h2>
   <ul>
-    <li>Lorem ipsum dolor sit amet, vidit suscipit at mei.</li>
-    <li>
-      Quem denique mea id. Usu ei regione indoctum dissentiunt, cu meliore fuisset mei, vel quod
-      voluptua ne.
-    </li>
-    <li>Ex dicat impedit mel, at eum oratio possit voluptatum.</li>
-    <li>Impetus fuisset ullamcorper pri cu, his posse iisque ad, aliquam honestatis usu id.</li>
+    <li>爱好一</li>
+    <li>爱好二</li>
   </ul>
 
   {/* tools */}
   <h2 id='tools'>Tools</h2>
-  <p>Current support tools as follow:</p>
-  <ToolSection
-    class='mb-5'
-    title='Productivity'
-    tools={[
-      {
-        name: 'Chrome',
-        description: 'Browser',
-        href: 'https://www.google.com/chrome/',
-        icon: import('@/assets/tools/chrome.svg?raw')
-      },
-      {
-        name: 'Firefox',
-        description: 'Browser',
-        href: 'https://www.mozilla.org/en-US/firefox',
-        icon: import('@/assets/tools/firefox.svg?raw')
-      },
-      {
-        name: 'Obsidian',
-        description: 'Note Taking',
-        href: 'https://www.obsidian.md/',
-        icon: import('@/assets/tools/notion.svg?raw')
-      },
-      {
-        name: 'Typora',
-        description: 'Markdown Editor',
-        href: 'https://typora.io/',
-        icon: import('@/assets/tools/typora.svg?raw')
-      }
-    ]}
-  />
+  <p>我常用的工具：</p>
+  {/* TODO: 替换为你自己的工具，图标放在 src/assets/tools/ 下 */}
   <ToolSection
     class='mb-5'
     title='Development'
@@ -79,48 +39,14 @@ const headings = [
         description: 'IDE',
         href: 'https://code.visualstudio.com/',
         icon: import('@/assets/tools/vscode.svg?raw')
-      },
-      {
-        name: 'Neovim',
-        description: 'IDE',
-        href: 'https://neovim.io/',
-        icon: import('@/assets/tools/neovim.svg?raw')
-      }
-    ]}
-  />
-  <ToolSection
-    class='mb-5'
-    title='Environment'
-    tools={[
-      {
-        name: 'Arch Linux',
-        description: 'Linux Distribution',
-        href: 'https://archlinux.org/',
-        icon: import('@/assets/tools/archlinux.svg?raw')
-      },
-      
-      {
-        name: 'Ubuntu 20.04 LTS',
-        description: 'Windows Subsystem for Linux',
-        href: 'https://ubuntu.com/',
-        icon: import('@/assets/tools/ubuntu.svg?raw')
-      },
-
-      {
-        name: 'Windows 11',
-        description: 'Lenovo XiaoXinPro 14',
-        href: 'https://news.microsoft.com/windows11-general-availability/',
-        icon: import('@/assets/tools/windows11.svg?raw')
       }
     ]}
   />
 
   {/* social-networks */}
   <h2 id='social-networks'>Social Networks</h2>
-  <p>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne.
-  </p>
+  <p>可以在这些平台找到我：</p>
+  {/* TODO: 按需增删平台，api 对应 https://github.com/spencerwooo/substats */}
   <Substats
     stats={[
       {
@@ -129,68 +55,26 @@ const headings = [
         link: 'https://github.com/stoicneko',
         text: 'followers',
         api: 'github/stoicneko'
-      },
-      {
-        platform: 'Telegram',
-        icon: 'telegram',
-        color: '#2ca5e0',
-        link: 'https://t.me/HZH_OWO',
-        text: 'subscribers',
-        api: 'telegram/HZH_OWO'
       }
     ]}
   />
 
-  {/* gossips */}
-  <h2 id='gossips'>Gossips</h2>
-  <Collapse title='Lorem ipsum'>
-    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
-    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
-    possit voluptatum.
-  </Collapse>
-
   {/* about-blog */}
   <h2 id='about-blog'>About Blog</h2>
-  <p>Website history:</p>
+  <p>建站历程：</p>
   <Timeline
     events={[
       {
         date: '2026-03-04',
         content:
-          'Website refactored using <a href="https://astro.build/" target="_blank">Astro</a> and <a href="https://github.com/srleom/astro-theme-resume" target="_blank">Astro Theme Resume</a>'
-      },
-      {
-        date: '2026-03-05',
-        content:
-          'Website abstracted as a theme and published on <a href="https://github.com/cworld1/astro-theme-pure"target="_blank">Github</a>'
-      },
-      {
-        date: '2026-03-05',
-        content: 'Began writing website docs'
+          '使用 <a href="https://astro.build/" target="_blank">Astro</a> + <a href="https://github.com/cworld1/astro-theme-pure" target="_blank">Astro Theme Pure</a> 搭建博客'
       }
     ]}
   />
-  <p>
-    The smooth operation and personalized customization of website also rely on the resources and
-    technical support provided by the following excellent projects/service providers:
-  </p>
+  <p>本站的搭建与运行依赖以下优秀的项目 / 服务：</p>
   <ul>
-    <li>Domain: <a href='#' target='_blank'>Alibaba Cloud</a></li>
-    <li>
-      Framework & Theme: <a href='https://astro.build/' target='_blank'>Astro</a> + <a
-        href='https://github.com/cworld1/astro-theme-pure'
-        target='_blank'>Astro Theme Pure</a
-      >
-    </li>
-    <li>Comment system: <a href='https://waline.js.org' target='_blank'>Waline</a></li>
-    <li>
-      Visits: <a href='https://supabase.com/' target='_blank'>Supabase</a> +
-      <a href='https://waline.js.org/' target='_blank'>Waline</a>
-    </li>
-    <li>
-      Other statistics: <a href='https://github.com/spencerwooo/substats' target='_blank'
-        >Substats</a
-      >
-    </li>
+    <li>框架与主题：<a href='https://astro.build/' target='_blank'>Astro</a> + <a href='https://github.com/cworld1/astro-theme-pure' target='_blank'>Astro Theme Pure</a></li>
+    <li>部署：<a href='https://pages.cloudflare.com/' target='_blank'>Cloudflare Pages</a></li>
+    <li>评论系统：<a href='https://waline.js.org' target='_blank'>Waline</a></li>
   </ul>
 </PageLayout>

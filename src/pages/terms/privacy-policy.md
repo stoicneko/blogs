@@ -7,4 +7,4 @@ language: 'En'
 back: '/terms/list'
 ---
 
-It may be recommended to generate policies from [PolicyMaker.io](https://policymaker.io).
+> 待填写：在此处编写本站的隐私政策。

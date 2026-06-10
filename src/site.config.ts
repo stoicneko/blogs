@@ -63,12 +63,12 @@ export const theme: ThemeUserConfig = {
     year: `© ${new Date().getFullYear()}`,
     // year: `© 2019 - ${new Date().getFullYear()}`,
     links: [
-      // Registration link
-      {
-        title: 'Moe ICP 114514',
-        link: 'https://icp.gov.moe/?keyword=114514',
-        style: 'text-sm' // Uno/TW CSS class
-      },
+      // Registration link (示例，可填写你的备案号)
+      // {
+      //   title: 'ICP 备案号',
+      //   link: 'https://beian.miit.gov.cn/',
+      //   style: 'text-sm' // Uno/TW CSS class
+      // },
       // Privacy Policy link
       {
         title: 'Site Policy',
@@ -105,11 +105,7 @@ export const integ: IntegrationUserConfig = {
   links: {
     // Friend logbook
     logbook: [
-      { date: '2025-03-16', content: 'Is there a leakage?' },
-      { date: '2025-03-16', content: 'A leakage of what?' },
-      { date: '2025-03-16', content: 'I have a full seat of water, like, full of water!' },
-      { date: '2025-03-16', content: 'Must be the water.' },
-      { date: '2025-03-16', content: "Let's add that to the words of wisdom." }
+      // { date: '2026-01-01', content: '在这里记录友链相关的小事' }
     ],
     // Yourself link info
     applyTip: [
