@@ -34,11 +34,13 @@ const { title = true, class: className, ...props } = Astro.props
   {title && <h2 class='text-foreground font-medium'>DOCS</h2>}
   <ul class='mt-4 flex flex-col gap-y-5'>
     {
-      Object.entries(docCategories).map(([id, title]: [string, string]) => (
+      Object.entries(docCategories)
+        .filter(([id]) => (docsByCate[id]?.length ?? 0) > 0)
+        .map(([id, title]: [string, string]) => (
         <li>
           <h3 class='text-muted-foreground text-xs tracking-widest uppercase'>{title}</h3>
           <ul class='mt-2 flex flex-col'>
-            {docsByCate[id]
+            {(docsByCate[id] ?? [])
               .sort((a, b) => a.data.order - b.data.order)
               .map((doc) => (
                 <li class='docs-item flex relative ms-2 px-3 py-1 text-foreground/75 transition-all rounded-2xl'>
