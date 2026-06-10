@@ -1,7 +1,12 @@
 ---
 import { type iconsType } from 'astro-pure/types'
 import { Icon } from 'astro-pure/user'
+import QqIcon from '@/assets/icons/qq.svg'
 import XiaohongshuIcon from '@/assets/icons/xiaohongshu.svg'
+
+// Custom monochrome icons for platforms the theme has no built-in icon for.
+const customIcons = { xiaohongshu: XiaohongshuIcon, qq: QqIcon }
+type CustomIcon = keyof typeof customIcons
 
 interface SocialItem {
   /** Display name shown on the row */
@@ -11,9 +16,9 @@ interface SocialItem {
   /** Destination URL. Omit it for handles that have no public profile URL
    *  (e.g. Discord) — the row then becomes click-to-copy of `handle`. */
   link?: string
-  /** Built-in icon name (telegram, instagram, discord…) or 'xiaohongshu' for the custom logo */
-  icon: iconsType | 'xiaohongshu'
-  /** Optional icon color override (CSS color); ignored for the xiaohongshu logo */
+  /** Built-in icon name (telegram, instagram, discord…) or a custom one (xiaohongshu, qq) */
+  icon: iconsType | CustomIcon
+  /** Optional icon color override (CSS color); ignored for custom icons */
   color?: string
 }
 
@@ -28,12 +33,12 @@ const rowClass =
 <div class='not-prose flex flex-col gap-2 rounded-xl border p-2 sm:p-3'>
   {
     links.map(({ platform, handle, link, icon, color }) => {
-      const iconEl =
-        icon === 'xiaohongshu' ? (
-          <XiaohongshuIcon class='size-6 shrink-0' />
-        ) : (
-          <Icon name={icon} color={color} class='size-6 shrink-0' />
-        )
+      const CustomIcon = customIcons[icon as CustomIcon]
+      const iconEl = CustomIcon ? (
+        <CustomIcon class='size-6 shrink-0' />
+      ) : (
+        <Icon name={icon as iconsType} color={color} class='size-6 shrink-0' />
+      )
       const name = (
         <span class='font-medium text-foreground transition-colors group-hover:text-primary'>
           {platform}
