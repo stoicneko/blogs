@@ -23,9 +23,11 @@ bun lint
 # Preview production build
 bun preview
 
-# Create a new blog post (interactive)
+# Create a new blog post — project's custom interactive scaffolder (scripts/new-post.mjs)
 bun new
-# or: bun pure new
+
+# Scaffold via the theme CLI instead (packages/pure/scripts/new.mjs) — a different, separate flow
+bun pure new
 
 # Run all checks + format in one shot
 bun yijiansilian
@@ -63,7 +65,8 @@ This is a **monorepo** with two distinct parts:
 ## Key Conventions
 
 - **Styling**: UnoCSS only — no plain CSS or Tailwind classes. Typography uses the `prose` class via `@unocss/preset-typography`.
-- **Deployment target**: Cloudflare Pages (SSR via `@astrojs/cloudflare`). The site URL is `https://blogs-6hn.pages.dev`.
+- **Deployment target**: Cloudflare Pages (SSR via `@astrojs/cloudflare`). The site URL is `https://blogs-6hn.pages.dev`. `wrangler.jsonc` sets the Pages build output to `dist/` with `nodejs_compat`.
+- **Linting scope**: `bun lint` only targets `src/**`; `scripts/*` and `public/scripts/*` are eslint-ignored, so the theme package and Node scripts are not linted.
 - **Formatting**: Prettier with `prettier-plugin-astro`. No semicolons, single quotes, 100-char print width. Import order is enforced by `@ianvs/prettier-plugin-sort-imports`.
 - **Blog post frontmatter** (required: `title`, `description`, `publishDate`; optional: `updatedDate`, `heroImage`, `tags`, `draft`, `comment`).
 - **Docs frontmatter** (required: `title`, `description`; optional: `publishDate`, `updatedDate`, `tags`, `draft`, `order`).
