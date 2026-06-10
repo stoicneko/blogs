@@ -1,7 +1,6 @@
 ---
-import { Spoiler, Timeline } from 'astro-pure/user'
+import { Button, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
-import Substats from '@/components/about/Substats.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
 
 const headings = [
@@ -28,8 +27,37 @@ const headings = [
 
   {/* tools */}
   <h2 id='tools'>Tools</h2>
-  <p>我常用的工具：</p>
-  {/* TODO: 替换为你自己的工具，图标放在 src/assets/tools/ 下 */}
+  <p>Current support tools as follow:</p>
+  <ToolSection
+    class='mb-5'
+    title='Productivity'
+    tools={[
+      {
+        name: 'Chrome',
+        description: 'Browser',
+        href: 'https://www.google.com/chrome/',
+        icon: import('@/assets/tools/chrome.svg?raw')
+      },
+      {
+        name: 'Firefox',
+        description: 'Browser',
+        href: 'https://www.mozilla.org/en-US/firefox',
+        icon: import('@/assets/tools/firefox.svg?raw')
+      },
+      {
+        name: 'Obsidian',
+        description: 'Note Taking',
+        href: 'https://www.obsidian.md/',
+        icon: import('@/assets/tools/notion.svg?raw')
+      },
+      {
+        name: 'Typora',
+        description: 'Markdown Editor',
+        href: 'https://typora.io/',
+        icon: import('@/assets/tools/typora.svg?raw')
+      }
+    ]}
+  />
   <ToolSection
     class='mb-5'
     title='Development'
@@ -39,25 +67,44 @@ const headings = [
         description: 'IDE',
         href: 'https://code.visualstudio.com/',
         icon: import('@/assets/tools/vscode.svg?raw')
+      },
+      {
+        name: 'Neovim',
+        description: 'IDE',
+        href: 'https://neovim.io/',
+        icon: import('@/assets/tools/neovim.svg?raw')
+      }
+    ]}
+  />
+  <ToolSection
+    class='mb-5'
+    title='Environment'
+    tools={[
+      {
+        name: 'Arch Linux',
+        description: 'Linux Distribution',
+        href: 'https://archlinux.org/',
+        icon: import('@/assets/tools/archlinux.svg?raw')
+      },
+      {
+        name: 'Ubuntu 20.04 LTS',
+        description: 'Windows Subsystem for Linux',
+        href: 'https://ubuntu.com/',
+        icon: import('@/assets/tools/ubuntu.svg?raw')
+      },
+      {
+        name: 'Windows 11',
+        description: 'Lenovo XiaoXinPro 14',
+        href: 'https://news.microsoft.com/windows11-general-availability/',
+        icon: import('@/assets/tools/windows11.svg?raw')
       }
     ]}
   />
 
   {/* social-networks */}
   <h2 id='social-networks'>Social Networks</h2>
-  <p>可以在这些平台找到我：</p>
-  {/* TODO: 按需增删平台，api 对应 https://github.com/spencerwooo/substats */}
-  <Substats
-    stats={[
-      {
-        platform: 'GitHub',
-        icon: 'github',
-        link: 'https://github.com/stoicneko',
-        text: 'followers',
-        api: 'github/stoicneko'
-      }
-    ]}
-  />
+  <p>我的社交媒体与联系方式都整理在 Connect 页面，欢迎来打个招呼。</p>
+  <Button title='查看全部联系方式' class='w-fit' href='/connect' variant='ahead' />
 
   {/* about-blog */}
   <h2 id='about-blog'>About Blog</h2>
