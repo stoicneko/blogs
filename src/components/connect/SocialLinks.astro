@@ -1,0 +1,84 @@
+---
+import { type iconsType } from 'astro-pure/types'
+import { Icon } from 'astro-pure/user'
+import XiaohongshuIcon from '@/assets/icons/xiaohongshu.svg'
+
+interface SocialItem {
+  /** Display name shown on the row */
+  platform: string
+  /** Optional handle / username shown on the right (e.g. @stoicneko) */
+  handle?: string
+  /** Destination URL. Omit it for handles that have no public profile URL
+   *  (e.g. Discord) — the row then becomes click-to-copy of `handle`. */
+  link?: string
+  /** Built-in icon name (telegram, instagram, discord…) or 'xiaohongshu' for the custom logo */
+  icon: iconsType | 'xiaohongshu'
+  /** Optional icon color override (CSS color); ignored for the xiaohongshu logo */
+  color?: string
+}
+
+type Props = { links: SocialItem[] }
+
+const { links } = Astro.props as Props
+
+const rowClass =
+  'group flex w-full items-center gap-3 rounded-lg border border-transparent px-3 py-2.5 text-left no-underline transition-all hover:border-border hover:bg-muted'
+---
+
+<div class='not-prose flex flex-col gap-2 rounded-xl border p-2 sm:p-3'>
+  {
+    links.map(({ platform, handle, link, icon, color }) => {
+      const iconEl =
+        icon === 'xiaohongshu' ? (
+          <XiaohongshuIcon class='size-6 shrink-0' />
+        ) : (
+          <Icon name={icon} color={color} class='size-6 shrink-0' />
+        )
+      const name = (
+        <span class='font-medium text-foreground transition-colors group-hover:text-primary'>
+          {platform}
+        </span>
+      )
+      return link ? (
+        <a class={rowClass} href={link} target='_blank' rel='noopener noreferrer'>
+          {iconEl}
+          {name}
+          <span class='ml-auto flex items-center gap-1.5 text-sm text-muted-foreground'>
+            {handle && <samp>{handle}</samp>}
+            <Icon name='up' class='size-3.5 -rotate-45 opacity-60' />
+          </span>
+        </a>
+      ) : (
+        <button type='button' class={`${rowClass} cursor-pointer`} data-copy={handle}>
+          {iconEl}
+          {name}
+          <span class='ml-auto flex items-center gap-1.5 text-sm text-muted-foreground'>
+            {handle && <samp>{handle}</samp>}
+            <span data-copy-tip class='text-xs opacity-60'>点击复制</span>
+          </span>
+        </button>
+      )
+    })
+  }
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-copy]').forEach((el) => {
+    el.addEventListener('click', async () => {
+      const text = el.dataset.copy ?? ''
+      try {
+        await navigator.clipboard.writeText(text)
+      } catch {
+        return
+      }
+      const tip = el.querySelector('[data-copy-tip]')
+      if (tip) {
+        const prev = tip.textContent
+        tip.textContent = '已复制 ✓'
+        setTimeout(() => {
+          tip.textContent = prev
+        }, 1500)
+      }
+    })
+  })
+</script>

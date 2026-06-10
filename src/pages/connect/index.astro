@@ -1,0 +1,65 @@
+---
+import PageLayout from '@/layouts/CommonPage.astro'
+import SocialLinks from '@/components/connect/SocialLinks.astro'
+
+// 各平台账号与链接。增删平台直接增删数组项即可。
+// `icon` 用主题内置图标名（telegram / instagram / discord / x / weibo /
+// bilibili / zhihu / tiktok / reddit / youtube / email …）；
+// 小红书没有内置图标，固定写 'xiaohongshu'（自定义 logo）。
+// 省略 `link` 的项（如 Discord）会变成「点击复制 handle」，因为这类用户名没有公开主页 URL。
+const socials = [
+  {
+    platform: '小红书',
+    handle: '主号',
+    link: 'https://www.xiaohongshu.com/user/profile/63b3fe700000000026013353',
+    icon: 'xiaohongshu' as const
+  },
+  {
+    platform: '小红书',
+    handle: '小号',
+    link: 'https://www.xiaohongshu.com/user/profile/2616983685',
+    icon: 'xiaohongshu' as const
+  },
+  {
+    platform: 'Weibo',
+    handle: '@stoicneko',
+    link: 'https://www.weibo.com/u/7846341964',
+    icon: 'weibo' as const
+  },
+  {
+    platform: 'Bilibili',
+    handle: 'stoicneko',
+    link: 'https://space.bilibili.com/2126639743',
+    icon: 'bilibili' as const
+  },
+  {
+    platform: 'Instagram',
+    handle: '@stoicneko',
+    link: 'https://instagram.com/stoicneko',
+    icon: 'instagram' as const
+  },
+  {
+    platform: 'X',
+    handle: '@stoicneko',
+    link: 'https://x.com/stoicneko',
+    icon: 'x' as const
+  },
+  {
+    platform: 'Telegram',
+    handle: '@stoicneko',
+    link: 'https://t.me/stoicneko',
+    icon: 'telegram' as const
+  },
+  {
+    platform: 'Discord',
+    handle: 'stoicneko',
+    link: 'https://discord.com/users/stoicneko',
+    icon: 'discord' as const
+  }
+]
+---
+
+<PageLayout title='Connect'>
+  <p>在这些平台上都能找到我，欢迎来打个招呼 👋</p>
+  <SocialLinks links={socials} />
+</PageLayout>
