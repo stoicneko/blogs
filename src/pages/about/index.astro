@@ -1,5 +1,5 @@
 ---
-import { Button, Spoiler, Timeline } from 'astro-pure/user'
+import { Button, Collapse, Spoiler, Timeline } from 'astro-pure/user'
 import PageLayout from '@/layouts/CommonPage.astro'
 import ToolSection from '@/components/about/ToolSection.astro'
 
@@ -7,22 +7,33 @@ const headings = [
   { depth: 2, slug: 'hobbies', text: 'Hobbies' },
   { depth: 2, slug: 'tools', text: 'Tools' },
   { depth: 2, slug: 'social-networks', text: 'Social Networks' },
+  { depth: 2, slug: 'gossips', text: 'Gossips' },
   { depth: 2, slug: 'about-blog', text: 'About Blog' }
 ]
 ---
 
 <PageLayout title='About' {headings} comment>
-  {/* TODO: 在这里写你的自我介绍 */}
-  <p>这里写一句话介绍你自己。</p>
+  <p>Developer / Designer</p>
   <p>
-    Motto: Stay hungry, Stay foolish. <Spoiler>这里可以藏一句悄悄话。</Spoiler>
+    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
+    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
+    possit voluptatum.
   </p>
+  <p>
+    Motto: Stay hungry, Stay foolish. <Spoiler>这里可以夹私货，比如为什么要演奏春日影！</Spoiler>
+  </p>
+  <Button title='Sponsor Me' class='w-fit' href='/projects#sponsorship' variant='ahead' />
 
-  {/* hobbies */}
+  {/* general-talk */}
   <h2 id='hobbies'>Hobbies</h2>
   <ul>
-    <li>爱好一</li>
-    <li>爱好二</li>
+    <li>Lorem ipsum dolor sit amet, vidit suscipit at mei.</li>
+    <li>
+      Quem denique mea id. Usu ei regione indoctum dissentiunt, cu meliore fuisset mei, vel quod
+      voluptua ne.
+    </li>
+    <li>Ex dicat impedit mel, at eum oratio possit voluptatum.</li>
+    <li>Impetus fuisset ullamcorper pri cu, his posse iisque ad, aliquam honestatis usu id.</li>
   </ul>
 
   {/* tools */}
@@ -106,22 +117,56 @@ const headings = [
   <p>我的社交媒体与联系方式都整理在 Connect 页面，欢迎来打个招呼。</p>
   <Button title='查看全部联系方式' class='w-fit' href='/connect' variant='ahead' />
 
+  {/* gossips */}
+  <h2 id='gossips'>Gossips</h2>
+  <Collapse title='Lorem ipsum'>
+    Lorem ipsum dolor sit amet, vidit suscipit at mei. Quem denique mea id. Usu ei regione indoctum
+    dissentiunt, cu meliore fuisset mei, vel quod voluptua ne. Ex dicat impedit mel, at eum oratio
+    possit voluptatum.
+  </Collapse>
+
   {/* about-blog */}
   <h2 id='about-blog'>About Blog</h2>
-  <p>建站历程：</p>
+  <p>Website history:</p>
   <Timeline
     events={[
       {
         date: '2026-03-04',
         content:
-          '使用 <a href="https://astro.build/" target="_blank">Astro</a> + <a href="https://github.com/cworld1/astro-theme-pure" target="_blank">Astro Theme Pure</a> 搭建博客'
+          'Website refactored using <a href="https://astro.build/" target="_blank">Astro</a> and <a href="https://github.com/srleom/astro-theme-resume" target="_blank">Astro Theme Resume</a>'
+      },
+      {
+        date: '2026-03-05',
+        content:
+          'Website abstracted as a theme and published on <a href="https://github.com/cworld1/astro-theme-pure"target="_blank">Github</a>'
+      },
+      {
+        date: '2026-03-05',
+        content: 'Began writing website docs'
       }
     ]}
   />
-  <p>本站的搭建与运行依赖以下优秀的项目 / 服务：</p>
+  <p>
+    The smooth operation and personalized customization of website also rely on the resources and
+    technical support provided by the following excellent projects/service providers:
+  </p>
   <ul>
-    <li>框架与主题：<a href='https://astro.build/' target='_blank'>Astro</a> + <a href='https://github.com/cworld1/astro-theme-pure' target='_blank'>Astro Theme Pure</a></li>
-    <li>部署：<a href='https://pages.cloudflare.com/' target='_blank'>Cloudflare Pages</a></li>
-    <li>评论系统：<a href='https://waline.js.org' target='_blank'>Waline</a></li>
+    <li>Domain: <a href='#' target='_blank'>Alibaba Cloud</a></li>
+    <li>
+      Framework & Theme: <a href='https://astro.build/' target='_blank'>Astro</a> + <a
+        href='https://github.com/cworld1/astro-theme-pure'
+        target='_blank'>Astro Theme Pure</a
+      >
+    </li>
+    <li>Comment system: <a href='https://waline.js.org' target='_blank'>Waline</a></li>
+    <li>
+      Visits: <a href='https://supabase.com/' target='_blank'>Supabase</a> +
+      <a href='https://waline.js.org/' target='_blank'>Waline</a>
+    </li>
+    <li>
+      Other statistics: <a href='https://github.com/spencerwooo/substats' target='_blank'
+        >Substats</a
+      >
+    </li>
   </ul>
 </PageLayout>
