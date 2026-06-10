@@ -1,71 +1,66 @@
 ---
 import { type iconsType } from 'astro-pure/types'
-import { Icon } from 'astro-pure/user'
-import QqIcon from '@/assets/icons/qq.svg'
-import XiaohongshuIcon from '@/assets/icons/xiaohongshu.svg'
-
-// Custom monochrome icons for platforms the theme has no built-in icon for.
-const customIcons = { xiaohongshu: XiaohongshuIcon, qq: QqIcon }
-type CustomIcon = keyof typeof customIcons
+import SocialRow from './SocialRow.astro'
 
 interface SocialItem {
-  /** Display name shown on the row */
   platform: string
-  /** Optional handle / username shown on the right (e.g. @stoicneko) */
   handle?: string
-  /** Destination URL. Omit it for handles that have no public profile URL
-   *  (e.g. Discord) — the row then becomes click-to-copy of `handle`. */
+  /** Omit for handles without a public profile URL — the row becomes click-to-copy. */
   link?: string
-  /** Built-in icon name (telegram, instagram, discord…) or a custom one (xiaohongshu, qq) */
-  icon: iconsType | CustomIcon
-  /** Optional icon color override (CSS color); ignored for custom icons */
+  icon: iconsType | 'xiaohongshu' | 'qq'
   color?: string
 }
 
-type Props = { links: SocialItem[] }
+/** An entry is either a single row, or a stack of rows for the same platform
+ *  (collapsed by default, expands on hover / keyboard focus). */
+type Entry = SocialItem | { stack: SocialItem[] }
 
-const { links } = Astro.props as Props
-
-const rowClass =
-  'group flex w-full items-center gap-3 rounded-lg border border-transparent px-3 py-2.5 text-left no-underline transition-all hover:border-border hover:bg-muted'
+const { links } = Astro.props as { links: Entry[] }
 ---
 
 <div class='not-prose flex flex-col gap-2 rounded-xl border p-2 sm:p-3'>
   {
-    links.map(({ platform, handle, link, icon, color }) => {
-      const CustomIcon = customIcons[icon as CustomIcon]
-      const iconEl = CustomIcon ? (
-        <CustomIcon class='size-6 shrink-0' />
+    links.map((entry) =>
+      'stack' in entry ? (
+        <div class='social-stack relative flex flex-col'>
+          {entry.stack.map((item) => (
+            <SocialRow {...item} />
+          ))}
+        </div>
       ) : (
-        <Icon name={icon as iconsType} color={color} class='size-6 shrink-0' />
+        <SocialRow {...entry} />
       )
-      const name = (
-        <span class='font-medium text-foreground transition-colors group-hover:text-primary'>
-          {platform}
-        </span>
-      )
-      return link ? (
-        <a class={rowClass} href={link} target='_blank' rel='noopener noreferrer'>
-          {iconEl}
-          {name}
-          <span class='ml-auto flex items-center gap-1.5 text-sm text-muted-foreground'>
-            {handle && <samp>{handle}</samp>}
-            <Icon name='up' class='size-3.5 -rotate-45 opacity-60' />
-          </span>
-        </a>
-      ) : (
-        <button type='button' class={`${rowClass} cursor-pointer`} data-copy={handle}>
-          {iconEl}
-          {name}
-          <span class='ml-auto flex items-center gap-1.5 text-sm text-muted-foreground'>
-            {handle && <samp>{handle}</samp>}
-            <span data-copy-tip class='text-xs opacity-60'>点击复制</span>
-          </span>
-        </button>
-      )
-    })
+    )
   }
 </div>
+
+<style is:global>
+  .social-stack > * {
+    position: relative;
+    transition:
+      margin-top 0.28s ease,
+      transform 0.28s ease,
+      opacity 0.28s ease;
+  }
+  /* Topmost card stays put and covers the ones behind it */
+  .social-stack > :first-child {
+    z-index: 2;
+  }
+  /* Trailing cards slide up behind the first one, peeking out at the bottom */
+  .social-stack > :not(:first-child) {
+    z-index: 1;
+    margin-top: -2rem;
+    transform: scale(0.965);
+    opacity: 0.85;
+  }
+  /* Fan out on hover or when a child receives keyboard focus */
+  .social-stack:hover > :not(:first-child),
+  .social-stack:focus-within > :not(:first-child) {
+    margin-top: 0.5rem;
+    transform: none;
+    opacity: 1;
+  }
+</style>
 
 <script>
   document.querySelectorAll<HTMLElement>('[data-copy]').forEach((el) => {

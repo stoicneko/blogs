@@ -1,0 +1,62 @@
+---
+import { type iconsType } from 'astro-pure/types'
+import { Icon } from 'astro-pure/user'
+import QqIcon from '@/assets/icons/qq.svg'
+import XiaohongshuIcon from '@/assets/icons/xiaohongshu.svg'
+
+// Custom monochrome icons for platforms the theme has no built-in icon for.
+const customIcons = { xiaohongshu: XiaohongshuIcon, qq: QqIcon }
+type CustomIcon = keyof typeof customIcons
+
+interface Props {
+  platform: string
+  handle?: string
+  /** Omit for handles without a public profile URL — the row becomes click-to-copy. */
+  link?: string
+  icon: iconsType | CustomIcon
+  color?: string
+}
+
+const { platform, handle, link, icon, color } = Astro.props
+
+// bg-background keeps stacked rows opaque so they cleanly cover the ones behind them.
+const rowClass =
+  'group flex w-full items-center gap-3 rounded-lg border border-transparent bg-background px-3 py-2.5 text-left no-underline transition-all hover:border-border hover:bg-muted'
+const CustomIcon = customIcons[icon as CustomIcon]
+---
+
+{
+  link ? (
+    <a class={rowClass} href={link} target='_blank' rel='noopener noreferrer'>
+      {CustomIcon ? (
+        <CustomIcon class='size-6 shrink-0' />
+      ) : (
+        <Icon name={icon as iconsType} color={color} class='size-6 shrink-0' />
+      )}
+      <span class='font-medium text-foreground transition-colors group-hover:text-primary'>
+        {platform}
+      </span>
+      <span class='ml-auto flex items-center gap-1.5 text-sm text-muted-foreground'>
+        {handle && <samp>{handle}</samp>}
+        <Icon name='up' class='size-3.5 -rotate-45 opacity-60' />
+      </span>
+    </a>
+  ) : (
+    <button type='button' class={`${rowClass} cursor-pointer`} data-copy={handle}>
+      {CustomIcon ? (
+        <CustomIcon class='size-6 shrink-0' />
+      ) : (
+        <Icon name={icon as iconsType} color={color} class='size-6 shrink-0' />
+      )}
+      <span class='font-medium text-foreground transition-colors group-hover:text-primary'>
+        {platform}
+      </span>
+      <span class='ml-auto flex items-center gap-1.5 text-sm text-muted-foreground'>
+        {handle && <samp>{handle}</samp>}
+        <span data-copy-tip class='text-xs opacity-60'>
+          点击复制
+        </span>
+      </span>
+    </button>
+  )
+}

@@ -9,16 +9,21 @@ import SocialLinks from '@/components/connect/SocialLinks.astro'
 // 省略 `link` 的项（如 Discord）会变成「点击复制 handle」，因为这类用户名没有公开主页 URL。
 const socials = [
   {
-    platform: '小红书',
-    handle: '主号',
-    link: 'https://www.xiaohongshu.com/user/profile/63b3fe700000000026013353',
-    icon: 'xiaohongshu' as const
-  },
-  {
-    platform: '小红书',
-    handle: '小号',
-    link: 'https://www.xiaohongshu.com/user/profile/2616983685',
-    icon: 'xiaohongshu' as const
+    // 两个小红书账号堆叠展示：默认叠在一起，鼠标悬停 / 键盘聚焦时展开
+    stack: [
+      {
+        platform: '小红书',
+        handle: '主号',
+        link: 'https://www.xiaohongshu.com/user/profile/63b3fe700000000026013353',
+        icon: 'xiaohongshu' as const
+      },
+      {
+        platform: '小红书',
+        handle: '小号',
+        link: 'https://www.xiaohongshu.com/user/profile/2616983685',
+        icon: 'xiaohongshu' as const
+      }
+    ]
   },
   {
     platform: 'Weibo',
